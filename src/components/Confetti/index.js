@@ -1,28 +1,31 @@
-import { ConfettiPiece } from './styles';
+import ReactConfetti from 'react-confetti';
+import { useState, useEffect } from 'react';
 
-const generateRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+const Confetti = () => {
+    const [windowDimension, setDimension] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
 
-const Confetti = ({ quantity }) => {
-    const confettiPieces = [];
+    const detectSize = () => {
+        setDimension({ width: window.innerWidth, height: window.innerHeight });
+    };
 
-    for (let i = 0; i < quantity; i++) {
-        const leftPosition = generateRandomNumber(0, window.innerWidth);
-        const animationDelay = generateRandomNumber(0, 2000);
+    useEffect(() => {
+        window.addEventListener('resize', detectSize);
+        return () => {
+            window.removeEventListener('resize', detectSize);
+        };
+    }, [windowDimension]);
 
-        confettiPieces.push(
-            <ConfettiPiece
-                key={i}
-                style={{
-                    left: `${leftPosition}px`,
-                    animationDelay: `-${animationDelay}ms` // Inverte para garantir variação aleatória
-                }}
-            />
-        );
-    }
-
-    return <div>{confettiPieces}</div>;
+    return (
+        <ReactConfetti
+            width={windowDimension.width}
+            height={windowDimension.height}
+            tweenDuration={1000}
+            gravity={0.09}
+        />
+    );
 };
 
 export default Confetti;
