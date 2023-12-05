@@ -13,7 +13,8 @@ export const Center = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 250px;
+    flex-direction: column;
+    width: 450px;
     height: 250px;
     border-radius: 5px;
     box-shadow: 10px 2px 20px rgba(0, 0, 0, 0.5);
@@ -25,6 +26,18 @@ export const Button = styled.button`
     border: none;
     border-radius: 5px;
     padding: 10px 5px;
+`;
+
+export const Title = styled.h2`
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+    margin-bottom: 12px;
+`;
+
+export const SubTitle = styled.h3`
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
 `;
 
 const zoomOutAndFade = keyframes`
